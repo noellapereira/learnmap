@@ -1,5 +1,8 @@
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8001")
-  .replace(/\/+$/, "");
+const API_BASE_URL = (
+  typeof import.meta.env.VITE_API_BASE_URL === "string"
+    ? import.meta.env.VITE_API_BASE_URL
+    : "http://localhost:8001"
+).replace(/\/+$/, "");
 const configuredTimeout = Number(import.meta.env.VITE_API_TIMEOUT_MS || 60000);
 const API_TIMEOUT_MS = Number.isFinite(configuredTimeout) && configuredTimeout > 0
   ? configuredTimeout

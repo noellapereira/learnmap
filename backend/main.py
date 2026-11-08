@@ -78,18 +78,21 @@ knowledge_provider: KnowledgeProvider | None = (
 mooccubex_catalog = MoocCubeXCatalog(os.getenv("MOOCCUBEX_DATA_DIR"))
 configure_knowledge_sources(knowledge_provider, mooccubex_catalog)
 
+raw_origins = os.getenv(
+    "LEARNMAP_CORS_ORIGINS",
+    "http://localhost:5173,http://127.0.0.1:5173,http://localhost:5174,http://127.0.0.1:5174,*",
+)
+cors_origins = [o.strip() for o in raw_origins.split(",") if o.strip()]
+if not cors_origins:
+    cors_origins = ["*"]
+
 app = FastAPI(title="LearnMap Learning Path API", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-    ],
+    allow_origins=cors_origins,
     allow_credentials=False,
-    allow_methods=["GET", "POST"],
-    allow_headers=["Content-Type"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 app.include_router(smart_notes_router)
 app.include_router(adaptive_quiz_router)

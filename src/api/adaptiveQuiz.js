@@ -1,5 +1,8 @@
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "http://localhost:8001")
-  .replace(/\/+$/, "");
+const API_BASE_URL = (
+  typeof import.meta.env.VITE_API_BASE_URL === "string"
+    ? import.meta.env.VITE_API_BASE_URL
+    : "http://localhost:8001"
+).replace(/\/+$/, "");
 const API_TIMEOUT_MS = 30000;
 
 async function postJson(path, body) {
