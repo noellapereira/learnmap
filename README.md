@@ -234,7 +234,7 @@ The latest recorded backend test run passed **44 tests**, and the frontend produ
 
 LearnMap currently uses **NLP/statistical baselines, curated knowledge, external retrieval, and rules** rather than a universal trained AI model. The curated topic list is finite; external discovery depends on network availability or a configured dataset; and progress/mastery is not persisted to MongoDB.
 
-## 10. How to run Code
+## 10. How to run this Code
 
 Open **two Command Prompt windows** from the project folder.
 
