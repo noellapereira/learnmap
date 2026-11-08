@@ -1,7 +1,5 @@
 const API_BASE_URL = (
-  typeof import.meta.env.VITE_API_BASE_URL === "string"
-    ? import.meta.env.VITE_API_BASE_URL
-    : "http://localhost:8001"
+  import.meta.env.VITE_API_BASE_URL ?? (import.meta.env.DEV ? "http://localhost:8001" : "")
 ).replace(/\/+$/, "");
 const API_TIMEOUT_MS = 30000;
 
@@ -35,7 +33,7 @@ async function postJson(path, body) {
       throw error;
     }
     throw new Error(
-      `Couldn't reach the LearnMap API at ${API_BASE_URL}. Start the FastAPI backend and try again.`,
+      `Couldn't reach the LearnMap API at ${API_BASE_URL || "the server"}. Start the FastAPI backend and try again.`,
       { cause: error },
     );
   } finally {
